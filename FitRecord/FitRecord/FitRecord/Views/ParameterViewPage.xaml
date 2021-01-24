@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FitRecord.Views.ParameterViewPage"
+             Title="View Parameters">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="New Unit" Clicked="OnNewUnit" TextColor="Green" BackgroundColor="Transparent"/>
+            <ListView x:Name="ParameterListView"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None"
+                      ItemsSource="{Binding Parameters}"
+                      ItemSelected="OnItemSelected"
+                      ItemTapped="OnItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Edit" Clicked="OnEdit" CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Delete" Clicked="OnDelete" CommandParameter="{Binding .}" IsDestructive="True"/>
+                            </ViewCell.ContextActions>
+                            <Frame CornerRadius="4" Margin="5" Padding="5" HasShadow="True">
+                                <StackLayout Spacing="0">
+                                    <Label Text="{Binding Name, StringFormat='Name: {0}'}" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Unit, StringFormat='Unit: {0}'}"/>
+                                        <Label Text="{Binding IsActive, StringFormat='Active?: {0}'}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
